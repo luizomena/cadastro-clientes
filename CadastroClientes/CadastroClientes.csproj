@@ -23,12 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\app\components\addemployee\addemployee.component.ts" />
-    <None Remove="ClientApp\app\components\fetchemployee\fetchemployee.component.ts" />
     <None Remove="ClientApp\app\components\listacliente\listacliente.component.ts" />
     <None Remove="ClientApp\app\components\novocliente\novocliente.component.ts" />
     <None Remove="ClientApp\app\Services\cliente.service.ts" />
-    <None Remove="ClientApp\app\Services\empservice.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,12 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\components\addemployee\addemployee.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\novocliente\novocliente.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\listacliente\listacliente.component.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\fetchemployee\fetchemployee.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\Services\cliente.service.ts" />
-    <TypeScriptCompile Include="ClientApp\app\Services\empservice.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

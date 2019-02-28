@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { EmployeeService } from '../../services/empservice.service'
 import { ClienteService } from '../../services/cliente.service';
 
 @Component({
@@ -10,13 +9,8 @@ import { ClienteService } from '../../services/cliente.service';
 export class AppComponent {
     public loading = true;
 
-    constructor(private _employeeService: EmployeeService, private _clienteService: ClienteService)
+    constructor(private _clienteService: ClienteService)
     {
-        _employeeService.loadEmitted$.subscribe(
-            val => {
-                this.loading = val;
-            });
-
         _clienteService.loadEmitted$.subscribe(
             val => {
                 this.loading = val;
