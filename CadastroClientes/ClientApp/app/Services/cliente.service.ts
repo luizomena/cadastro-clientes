@@ -75,12 +75,6 @@ export class ClienteService {
             .catch(this.errorHandler);
     }
 
-    deleteEndereco(endereco) {
-        return this._http.delete(this.myAppUrl + "api/Cliente/Endereco/Delete/" + endereco)
-            .map((response: Response) => response.json())
-            .catch(this.errorHandler);
-    }
-
     errorHandler(error: Response) {
         console.log(error);
         return Observable.throw(error);

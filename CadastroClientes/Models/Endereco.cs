@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CadastroClientes.Models
 {
@@ -14,7 +15,11 @@ namespace CadastroClientes.Models
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string Pais { get; set; }
+        
+        [ForeignKey("Cliente")]
         public int ClienteId { get; set; }
+
+        [ForeignKey("TipoEndereco")]
         public int TipoEnderecoId { get; set; }
         
     }

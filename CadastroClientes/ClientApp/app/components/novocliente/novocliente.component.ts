@@ -10,6 +10,7 @@ import { ClienteService } from '../../services/cliente.service';
 })
 
 export class NovoClienteComponent implements OnInit {
+    
     clienteForm: FormGroup;
     endereco: FormArray;
     telefone: FormArray;
@@ -33,24 +34,18 @@ export class NovoClienteComponent implements OnInit {
             clienteId: 0,
             nome: ['', [Validators.required]],
             nascimento: ['', [Validators.required]],
-            cpf: ['', [Validators.required]],
+            cpf: ['', [Validators.required, Validators.maxLength(11)]],
             rg: ['', [Validators.required]],
-            endereco: this._fb.array([
-                this.createEndereco()                
-            ]),
-            telefone: this._fb.array([
-                this.createTelefone()
-            ]),
-            redeSocial: this._fb.array([
-                this.createRedeSocial()
-            ])
+            endereco: this._fb.array([]),
+            telefone: this._fb.array([]),
+            redeSocial: this._fb.array([])
         })
     }
 
     createEndereco(): FormGroup {
         return this._fb.group({
             enderecoId: 0,
-            cep: ['', [Validators.required]],
+            cep: ['', [Validators.required, Validators.maxLength(8)]],
             logradouro: ['', [Validators.required]],
             numero: ['', [Validators.required]],
             complemento: [''],
@@ -66,7 +61,7 @@ export class NovoClienteComponent implements OnInit {
     createTelefone(): FormGroup{
         return this._fb.group({
             telefoneId: 0,
-            numero: ['', [Validators.required]],
+            numero: ['', [Validators.required, Validators.maxLength(11)]],
             clienteId: 0,
             tipoTelefoneId: 0
         })
@@ -117,28 +112,28 @@ export class NovoClienteComponent implements OnInit {
                     
                     resp.endereco.forEach(e => endereco.push(this._fb.group({
                         enderecoId: e.enderecoId,
-                        cep: e.cep,
-                        logradouro: e.logradouro,
-                        numero: e.numero,
+                        cep: [e.cep, [Validators.required, Validators.maxLength(8)]],
+                        logradouro: [e.logradouro, [Validators.required]],
+                        numero: [e.numero, [Validators.required]],
                         complemento: e.complemento,
-                        bairro: e.bairro,
-                        cidade: e.cidade,
-                        estado: e.estado,
-                        pais: e.pais,
+                        bairro: [e.bairro, [Validators.required]],
+                        cidade: [e.cidade, [Validators.required]],
+                        estado: [e.estado, [Validators.required]],
+                        pais: [e.pais, [Validators.required]],
                         clienteId: e.clienteId,
                         tipoEnderecoId: e.tipoEnderecoId
                     })));
 
                     resp.telefone.forEach(t => telefone.push(this._fb.group({
                         telefoneId: t.telefoneId,
-                        numero: t.numero,
+                        numero: [t.numero, [Validators.required, Validators.maxLength(11)]],
                         clienteId: t.clienteId,
                         tipoTelefoneId: t.tipoTelefoneId
                     })));
 
                     resp.redeSocial.forEach(r => redeSocial.push(this._fb.group({
                         redeSocialId: r.redeSocialId,
-                        link: r.link,
+                        link: [r.link, [Validators.required]],
                         clienteId: r.clienteId,
                         tipoRedeSocialId: r.tipoRedeSocialId
                     })));
@@ -195,22 +190,22 @@ export class NovoClienteComponent implements OnInit {
     deleteEndereco(index) {
         var _i = index;
             
-        const endereco = this.clienteForm.get('endereco') as FormArray;
-        endereco.removeAt(_i);
+        this.endereco = this.clienteForm.get('endereco') as FormArray;
+        this.endereco.removeAt(_i);
     }
 
     deleteTelefone(index) {
         var _i = index;
             
-        const telefone = this.clienteForm.get('telefone') as FormArray;
-        telefone.removeAt(_i);
+        this.telefone = this.clienteForm.get('telefone') as FormArray;
+        this.telefone.removeAt(_i);
     }
 
     deleteRedeSocial(index) {
         var _i = index;
             
-        const redeSocial = this.clienteForm.get('redeSocial') as FormArray;
-        redeSocial.removeAt(_i);
+        this.redeSocial = this.clienteForm.get('redeSocial') as FormArray;
+        this.redeSocial.removeAt(_i);
     }
 
     get nome() { return this.clienteForm.get('nome'); }
